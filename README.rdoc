@@ -1,0 +1,4 @@
+= groupmanager
+
+
+This plugin used for project tabs group management by project-admins. Non redmine admins
