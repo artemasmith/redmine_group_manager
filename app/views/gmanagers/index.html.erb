@@ -1,22 +1,28 @@
-<h2>GmanagersController#index</h2>
-
-<h1> Hello!!</h1>
+<h2>Группы теущего проекта</h2>
 
 
+
+<div class="splitcontentleft">
 <table class="list groups">
 <thead>
-<th> Группа </th>
-<th> Пользователи </th>
+<th> Groups </th>
+<th> Users </th>
+<th> </th>
 </thead>
 
 <tbody>
 <% for k,v in @groups %>
 <tr>
 
-<td><%= k %></td>
-<td> <%= v %> </td>
+<td><%= link_to_group(k) %></td>
+<td> <%= v.count %> </td>
+<td class="button"> <%= link_to "Delete",{:controller=>"gmanagers", :action=>"destroy",:id=>k}, :method=>"delete", :confirm=>"Are you sure?",:class=>"icon icon-del"%></td>
 
 </tr>
 <% end %>
 </tbody>
 </table>
+
+<br>
+<%= link_to "Create",new_gmanager_path(:project_id=>params["project_id"]), :class => "icon icon-add" %>
+</div>
