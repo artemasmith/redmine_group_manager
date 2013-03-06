@@ -12,4 +12,5 @@ end
 def render_user_depart(id)
     return Gmanager.get_user_depart(id)
 end
+
 end

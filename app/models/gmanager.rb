@@ -32,5 +32,10 @@ def self.get_user_depart(id)
     res[:dep]= val[1][:value].to_s
     return res
 end
+
+def self.get_group_users(id)
+    id=id.to_s
+    return User.in_group(id)
+end
  
 end

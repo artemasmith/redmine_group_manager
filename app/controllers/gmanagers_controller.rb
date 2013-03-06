@@ -12,10 +12,15 @@ class GmanagersController < ApplicationController
   
   def show
     @project = Project.find(params[:project_id])
+    #only one group not all of them
     @groups = Gmanager.all(params[:project_id])
     @temp="hello"
   end
   
+  def edit
+    @project = Project.find(params[:project_id])
+    @group=Gmanager.get_group_users(params["id"])
+  end
 
   def update
   end
