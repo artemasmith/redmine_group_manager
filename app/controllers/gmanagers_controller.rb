@@ -24,6 +24,31 @@ class GmanagersController < ApplicationController
   end
 
   def update
+    @project = Project.find(params[:project_id])
+    @group=Group.find(params["id"])
+    temp=params["edit"]
+    
+
+    case temp
+	when "add_user"
+	    if params["user_select"]
+
+		users = User.find_all_by_id(params["user_select"])
+		@group.users << users
+		respond_to do |format|
+		    format.html {redirect_to edit_gmanager_path(:project_id=>@project,:id=>params["id"])}
+		end
+	    else
+		respond_to do |format|
+		    format.html {render :action => "edit"}
+		end
+
+	    end
+	when "del_user"
+	    @group.users.delete(User.find(params["user"]))
+	when "group_name"
+	    
+    end
   end
 
   def destroy
