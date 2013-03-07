@@ -1,0 +1,25 @@
+<h2><%= link_to "Группы",gmanagers_path(:project_id=>params["project_id"])%>>><%= render_group_by_id(params["id"].to_i) %></h2>
+<div class="tab-content" id="tab-content-general">
+<div class="splitcontentleft">
+<table class="group list">
+<thead>
+<tr>
+<th>Пользователь</th> 
+<th>Должность </th> 
+<th>Подразделение </th> </tr>
+</thead>
+<tbody>
+<% for u in @group%>
+
+    <tr>
+        <td class="user"> <%= u["lastname"].to_s + " " + u["firstname"].to_s %> </td>
+        <% dep=render_user_depart(u["id"].to_i)%>
+        <td class="email"> <%= dep[:pos] %> </td>
+        <td> <%= dep[:dep]  %></td>
+    </tr>
+<% end %>
+</tbody>
+</table>
+<%= link_to "Edit", edit_gmanager_path(params["id"], :project_id=>params["project_id"]) %>
+</div>
+</div>

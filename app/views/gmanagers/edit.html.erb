@@ -1,0 +1,50 @@
+<h2><%= link_to "Groups",gmanagers_path(:project_id=>params["project_id"]) %> >> <%= link_to render_group_by_id(params["id"].to_i),gmanager_path(params[:id]) %> </h2>
+
+
+<div class="splitcontentleft">
+
+<%= form_tag gmanager_path(params["id"],:edit=>"group_name"), :method=>"put", :class=>"edit_group" do %>
+<fieldset>
+<p>
+<label>Group name change <%= text_field_tag "groupname",render_group_by_id(params["id"].to_i) %></label>  <%= submit_tag l(:button_save)%>
+</p>
+
+</fieldset>
+<% end %>
+
+<p> </p>
+<div class="tab-content" >
+<table class="list users">
+<thead><tr>
+      <th>Пользователь</th>
+      <th style="width:15%"></th>
+    </tr></thead>
+<tbody>
+
+<% for u in @group%>
+<tr> 
+<td> <%= u["lastname"].to_s + " " + u["firstname"].to_s %> </td>
+<td> <%= link_to "delete",gmanager_path(:group=>params["id"],:user=>u["id"]), :method=>"put", :class=>"icon icon-del" %> </td>
+</tr>
+<% end %>
+
+</tbody>
+</table>
+</div>
+
+</div>
+
+<div class="splitcontentright">
+<%= form_tag gmanager_path(params["id"],:edit=>"membership"), :method=>"put", :class=>"edit_group" do%>
+<div id="users">
+<fieldset>
+<% for k,v in @all_users %>
+<p><label> <%= check_box_tag 'user_select[]',k %> <%= v %> </label></p>
+<% end %>
+</div>
+</fieldset>
+<p>
+<%= submit_tag l(:button_add)%>
+</p>
+<% end %>
+</div>
