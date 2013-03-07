@@ -37,5 +37,28 @@ def self.get_group_users(id)
     id=id.to_s
     return User.in_group(id)
 end
- 
+
+def self.get_all_project_users(id)
+    id=id.to_s
+    pid=Project.find_by_identifier(id).id
+    tres=[]
+    mem=Member.find_all_by_project_id(pid)
+    for m in mem
+	begin
+	    user=User.find(m.user_id)
+	    tres.push(user)
+	rescue
+	    tres.concat(User.in_group(m.user_id))
+	    tres.uniq!
+	end
+    end
+    res={}
+    for t in tres
+	res[t["id"]]=t["lastname"].to_s + " " + t["firstname"].to_s
+    end
+    return res
+    
+end
+
+
 end
