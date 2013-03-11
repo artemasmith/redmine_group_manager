@@ -38,27 +38,52 @@ def self.get_group_users(id)
     return User.in_group(id)
 end
 
-def self.get_all_project_users(id)
+#get all users exept group's
+def self.get_all_project_users(id,grid)
     id=id.to_s
     pid=Project.find_by_identifier(id).id
     tres=[]
     mem=Member.find_all_by_project_id(pid)
-    for m in mem
-	begin
-	    user=User.find(m.user_id)
-	    tres.push(user)
-	rescue
-	    tres.concat(User.in_group(m.user_id))
-	    tres.uniq!
+    mem.delete_if{|x| x.user_id==grid}
+#   gusers=User.in_group(grid) 
+    mcount=mem.count
+    for i in 0..mcount-1
+# WTF???
+#	if !gusers.index{|x| x["id"].to_i==mem[i]['user_id'].to_i}
+	    begin
+		user=User.find(mem[i]['user_id'])
+		tres.push(user)
+	    rescue
+		tres.concat(User.in_group(mem[i]['user_id']))
+		tres.uniq!
+	    end
+
 	end
+#    end
+    
+#Fucking dump piecae of code cose index not working    
+
+    gusers=User.in_group(grid)
+    temp=[]
+    for i in gusers
+	temp.push(i["id"])
     end
     res={}
     for t in tres
-	res[t["id"]]=t["lastname"].to_s + " " + t["firstname"].to_s
+	if !temp.index(t["id"])
+	    res[t["id"]]=t["lastname"].to_s + " " + t["firstname"].to_s
+	end
     end
     return res
     
 end
 
+
+def self.delete_user_from_group(idus,idgr)
+    gr=Group.find(idgr)
+    us=User.find(idus)
+    gr.users.delete(us)
+    gr.save
+end
 
 end

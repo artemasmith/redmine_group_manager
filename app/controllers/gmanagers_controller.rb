@@ -20,7 +20,7 @@ class GmanagersController < ApplicationController
     @project = Project.find(params[:project_id])
     @group=Gmanager.get_group_users(params["id"])
 
-    @all_users=Gmanager.get_all_project_users(params[:project_id])
+    @all_users=Gmanager.get_all_project_users(params[:project_id],params["id"])
   end
 
   def update
@@ -45,12 +45,18 @@ class GmanagersController < ApplicationController
 
 	    end
 	when "del_user"
-	    @group.users.delete(User.find(params["user"]))
+	    #@group.users.delete(User.find(params["user"]))
+	    Gmanager.delete_user_from_group(params["user"],params["group"])
+	    respond_to do |format|
+		    format.html {redirect_to edit_gmanager_path(:project_id=>@project,:id=>params["group"])}
+	    end
 	when "group_name"
 	    
     end
   end
 
   def destroy
+    @project = Project.find(params[:project_id])
+    
   end
 end

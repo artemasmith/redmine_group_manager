@@ -24,7 +24,7 @@
 <% for u in @group%>
 <tr> 
 <td> <%= u["lastname"].to_s + " " + u["firstname"].to_s %> </td>
-<td> <%= link_to "delete",gmanager_path(:group=>params["id"],:user=>u["id"],:edit=>"del_user"), :method=>"put", :class=>"icon icon-del" %> </td>
+<td> <%= link_to "delete",gmanager_path(:group=>params["id"],:user=>u["id"],:edit=>"del_user",:project_id=>params["project_id"]), :method=>"put", :class=>"icon icon-del" %> </td>
 </tr>
 <% end %>
 
