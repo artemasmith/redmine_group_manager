@@ -300,9 +300,9 @@ ru:
   header_groups: Групппы-хед
   text_gmanagers_groups: Группы-текст1
   text-groups: Группы-просто текст
-  project_module_group: Управление группами
-  project_module_groups: Управление группами нр
-  project_module_plural_groups: Управление группамиии
+ 
+  project_module_groups: Управление группами
+ 
   button_create: Создать
   
   
@@ -1194,3 +1194,9 @@ ru:
   label_attribute_of_assigned_to: Assignee's %{name}
   label_attribute_of_fixed_version: Target version's %{name}
   label_copy_subtasks: Copy subtasks
+  label_groups: Группы
+  permission_view_groups: Просмотреть группы
+  permission_create_groups: Создавать группы
+  permission_change_groups: Изменять группы
+  permission_delete_groups: удалять группы
+
