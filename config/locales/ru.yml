@@ -300,8 +300,9 @@ ru:
   header_groups: Групппы-хед
   text_gmanagers_groups: Группы-текст1
   text-groups: Группы-просто текст
-  project_module_GroupsM: Управление группами
-  project_module_groupsm: Управление группами нр
+  project_module_group: Управление группами
+  project_module_groups: Управление группами нр
+  project_module_plural_groups: Управление группамиии
   button_create: Создать
   
   
