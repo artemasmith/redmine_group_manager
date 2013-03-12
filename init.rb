@@ -8,10 +8,10 @@ Redmine::Plugin.register :groupmanager do
 
   project_module :groups do
     permission :view_groups, :gmanagers => [:index, :show]
-    permission :create_groups, :gmanager => [:new, :create]
-    permission :change_groups, :gmanagers => [:update, :edit]
+    permission :create_groups, :gmanager => [:new,:create]
+    permission :change_groups, :gmanagers => :update
     permission :delete_groups, :gmanager => :destroy
 
   end
-  menu :project_menu, :groups, {:controller => 'gmanagers', :action => 'index'}, :caption=> "GroupsM",:last=>true, :param => :project_id
+  menu :project_menu, :groups, {:controller => 'gmanagers', :action => 'index'}, :caption=> "Groups",:last=>true, :param => :project_id
 end

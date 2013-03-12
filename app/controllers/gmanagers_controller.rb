@@ -3,7 +3,12 @@
 class GmanagersController < ApplicationController
   unloadable
 
+    before_filter :find_project, :authorize
 
+    def find_project
+	@project=Project.find(params["project_id"])
+    end
+    
   def index
 	@project = Project.find(params[:project_id])
 	@groups = Gmanager.all(params[:project_id])
