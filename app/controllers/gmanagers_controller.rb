@@ -1,3 +1,5 @@
+#!/bin/env ruby
+# encoding: utf-8
 class GmanagersController < ApplicationController
   unloadable
 
@@ -36,11 +38,22 @@ class GmanagersController < ApplicationController
 
   def update
     @project = Project.find(params[:project_id])
-    @group=Group.find(params["id"])
+    @group = Group.find(params["id"])
     temp=params["edit"]
     
 
     case temp
+	when "group_name"
+	    res=Gmanager.update_name(params["id"],params["groupname"])
+	    if res
+		respond_to do |format|
+		    format.html {redirect_to edit_gmanager_path(:project_id=>@project,:id=>params["id"])}
+		end
+	    else
+		respond_to do |format|
+		    format.html {render :action => "edit", :error=>"Группа с таким именем уже существует"}
+		end
+	    end
 	when "add_user"
 	    if params["user_select"]
 
@@ -51,7 +64,7 @@ class GmanagersController < ApplicationController
 		end
 	    else
 		respond_to do |format|
-		    format.html {render :action => "edit"}
+		    format.html {redirect_to edit_gmanager_path(:project_id=>@project,:id=>params["id"],:error=>"Группа с таким именем уже существует")}
 		end
 
 	    end

@@ -1,5 +1,5 @@
-<h2>Group Creation</h2>
-<label> Group name <%= form_tag gmanagers_path(:project_id=>@project), :method=>"post" do%></label>
+<h2>Добавление группы</h2>
+<label> Название группы <%= form_tag gmanagers_path(:project_id=>@project), :method=>"post" do%></label>
 <%= text_field_tag "groupname" %>
 
 <%= submit_tag l(:button_save)%>

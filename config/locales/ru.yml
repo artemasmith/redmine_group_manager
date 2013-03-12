@@ -300,7 +300,13 @@ ru:
   header_groups: Групппы-хед
   text_gmanagers_groups: Группы-текст1
   text-groups: Группы-просто текст
-
+  project_module_GroupsM: Управление группами
+  project_module_groupsm: Управление группами нр
+  button_create: Создать
+  
+  
+  
+  
   field_account: Учётная запись
   field_activity: Деятельность
   field_admin: Администратор

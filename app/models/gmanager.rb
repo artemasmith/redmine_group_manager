@@ -83,6 +83,15 @@ def self.get_all_project_users(id,grid)
     
 end
 
+def self.update_name(idgr,name)
+    begin
+	gr=Group.find(idgr)
+	res=gr.update_attributes(:lastname=>name.to_s)
+	return res
+    rescue
+	return 0
+    end
+end
 
 def self.delete_user_from_group(idus,idgr)
     gr=Group.find(idgr)
