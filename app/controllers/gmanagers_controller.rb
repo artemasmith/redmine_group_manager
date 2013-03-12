@@ -6,8 +6,19 @@ class GmanagersController < ApplicationController
 	@project = Project.find(params[:project_id])
 	@groups = Gmanager.all(params[:project_id])
   end
+  
+  def create
+    @project = Project.find(params[:project_id])
+    Gmanager.create_group(params["project_id"],params["groupname"])
+    respond_to do |format|
+	format.html {redirect_to gmanagers_path(:project_id=>@project)}
+    end
+  end
+
+    
 
   def new
+    @project = Project.find(params[:project_id])
   end
   
   def show
@@ -57,6 +68,9 @@ class GmanagersController < ApplicationController
 
   def destroy
     @project = Project.find(params[:project_id])
-    
+    Gmanager.delete_group(params["project_id"],params["id"])
+    respond_to do |format|
+	format.html {redirect_to gmanagers_path(:project_id=>@project)}
+    end
   end
 end
