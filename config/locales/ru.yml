@@ -296,14 +296,7 @@ ru:
   error_unable_to_connect: Невозможно подключиться (%{value})
   error_unable_delete_issue_status: Невозможно удалить статус задачи
   
-  label_groups: Группы
-  header_groups: Групппы-хед
-  text_gmanagers_groups: Группы-текст1
-  text-groups: Группы-просто текст
-  project_module_group: Управление группами
-  project_module_groups: Управление группами нр
-  project_module_plural_groups: Управление группамиии
-  button_create: Создать
+  
   
   
   
@@ -418,6 +411,9 @@ ru:
 
   
   label_reports: Отчеты
+  label_Groups: группы
+  label_group: группы
+  label_gmanagers: гра
 
   label_activity: Действия
   label_add_another_file: Добавить ещё один файл
@@ -531,6 +527,7 @@ ru:
   label_float: С плавающей точкой
   label_follows: предыдущая
   label_gantt: Диаграмма Ганта
+  label_groups: Группы
   label_general: Общее
   label_generate_key: Сгенерировать ключ
   label_greater_or_equal: ">="
@@ -1194,3 +1191,40 @@ ru:
   label_attribute_of_assigned_to: Assignee's %{name}
   label_attribute_of_fixed_version: Target version's %{name}
   label_copy_subtasks: Copy subtasks
+  
+  label_groups: Группы
+  header_groups: Групппы-хед
+  text_gmanagers_groups: Группы-текст1
+  text-groups: Группы-просто текст
+  project_module_group: Управление группами
+  project_module_groups: Управление группами нр
+  project_module_plural_groups: Управление группамиии
+  button_create: Создать
+  
+  
+  label_groups: Группы
+  permission_view_groups: Просмотреть группы
+  permission_create_groups: Создавать группы
+  permission_change_groups: Изменять группы
+  permission_delete_groups: удалять группы
+  label_groups_plural: Группы
+  label_groups_plural: Группы пл
+  label_groups: Группы пр
+  label_groups_new: Группы нью
+  label_gmanagers: Групппы
+  label_gmanager: Групппы1
+  label_gmanagers_plural: Групппы
+  field_groups: Гру
+  setting_groups: группп
+  text_groups: груууу
+  text_project_groups: групупуп
+  field_gmanagers: ГруГруГру
+  label_gmanagers: ааааа
+  label_gmanager: ааааа
+  text_gmanagers: аааадддд
+  field_gmanagers: дкдака
+  link_groups: реререр
+  menu_groups: 1111
+  menu_link_groups: 22222
+ 
+

@@ -16,10 +16,17 @@ class GmanagersController < ApplicationController
   
   def create
     @project = Project.find(params[:project_id])
-    Gmanager.create_group(params["project_id"],params["groupname"])
-    respond_to do |format|
-	format.html {redirect_to gmanagers_path(:project_id=>@project)}
+    res = Gmanager.create_group(params["project_id"],params["groupname"],session['user_id'])
+    
+    error=''
+    if res
+	error="группа с таким именем уже существует"
     end
+    respond_to do |format|
+	format.html {redirect_to gmanagers_path(:project_id=>@project,:error=>error)}
+    end
+    
+    
   end
 
     
@@ -46,6 +53,11 @@ class GmanagersController < ApplicationController
     @group = Group.find(params["id"])
     temp=params["edit"]
     
+    if Gmanager.is_admin_group(params["id"]) and not Gmanager.may_user_do(@project,session["user_id"],:change_admin_groups)
+	respond_to do |format|
+	    format.html {render :action => "edit", :error => "У вас нет прав для редактирвоания этой группы"}
+	end
+    end
 
     case temp
 	when "group_name"
@@ -79,9 +91,17 @@ class GmanagersController < ApplicationController
 	    respond_to do |format|
 		    format.html {redirect_to edit_gmanager_path(:project_id=>@project,:id=>params["group"])}
 	    end
-	when "group_name"
-	    
+	
     end
+  end
+  
+#empty controllers action
+  def update_admin
+    
+  end
+#empty controllers action
+  def delete_admin
+  
   end
 
   def destroy

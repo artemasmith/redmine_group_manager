@@ -1,4 +1,6 @@
 = groupmanager
 
 
-This plugin used for project tabs group management by project-admins. Non redmine admins
+This plugin makes project tab of group management. Redmine adminisrator allow project admin users, not 
+redmine admin users to change group's membership. Adding or deleteing users are allowed in scope of project. 
+You can't add user, wich is not project member.

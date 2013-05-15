@@ -1,3 +1,5 @@
+#!/bin/env ruby
+# encoding: utf-8
 Redmine::Plugin.register :groupmanager do
   name 'Groupmanager plugin'
   author 'Artem Kuznetsov'
@@ -8,10 +10,12 @@ Redmine::Plugin.register :groupmanager do
 
   project_module :groups do
     permission :view_groups, :gmanagers => [:index, :show]
-    permission :create_groups, :gmanager => [:new,:create]
-    permission :change_groups, :gmanagers => :update
-    permission :delete_groups, :gmanager => :destroy
+    permission :create_groups, :gmanagers => [:new, :create]
+    permission :change_groups, :gmanagers => [:update, :edit]
+    permission :delete_groups, :gmanagers => [:destroy,:delete]
+    permission :change_admin_groups, :gmanagers => [:update_admin]
+    permission :delete_admin_groups, :gmanagers => [:delete_admin]
 
   end
-  menu :project_menu, :groups, {:controller => 'gmanagers', :action => 'index'}, :caption=> "Groups",:last=>true, :param => :project_id
+  menu :project_menu, :groups, {:controller => 'gmanagers', :action => 'index'}, :caption=> "Группы",:last=>true, :param => :project_id
 end
