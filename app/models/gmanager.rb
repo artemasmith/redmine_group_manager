@@ -160,6 +160,16 @@ def self.may_user_do(id_project,id_user,action)
     return false
 end
 
+#check if user is owner of the group
+#iduser, idgr - IDs, string
+def self.is_owner(idgr,iduser)
+    if Gmanager.find_by_id_group_and_id_owner(idgr,iduser).blank?
+	return false
+    else
+	return true
+    end
+end
+
 #search in Gmanager, if there is no entry - group is admin group
 def self.is_admin_group(idgr)
     if Gmanager.find_by_id_group(idgr).blank?

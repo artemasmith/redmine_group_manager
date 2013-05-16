@@ -50,3 +50,7 @@
 </div>
 
 <%= session %>
+
+<br> debug=<%= params['debug']%>
+
+<%= link_to 'test', gmanager_path(:project_id=>'bug-tracking'),:method=>'get' %>

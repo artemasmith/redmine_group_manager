@@ -15,11 +15,8 @@ class GmanagersController < ApplicationController
   end
   
   def create
-    @project = Project.find(params[:project_id])
-    res = Gmanager.create_group(params["project_id"],params["groupname"],session['user_id'])
-    
     error=''
-    if res
+    if Gmanager.create_group(params["project_id"],params["groupname"],session['user_id'])
 	error="группа с таким именем уже существует"
     end
     respond_to do |format|
@@ -44,7 +41,7 @@ class GmanagersController < ApplicationController
   def edit
     @project = Project.find(params[:project_id])
     @group=Gmanager.get_group_users(params["id"])
-
+ 
     @all_users=Gmanager.get_all_project_users(params[:project_id],params["id"])
   end
 
@@ -53,10 +50,13 @@ class GmanagersController < ApplicationController
     @group = Group.find(params["id"])
     temp=params["edit"]
     
-    if Gmanager.is_admin_group(params["id"]) and not Gmanager.may_user_do(@project,session["user_id"],:change_admin_groups)
+    #check if user try to change admin created group
+    if Gmanager.is_admin_group(params["id"]) and not Gmanager.may_user_do(@project,session["user_id"],:change_admin_groups) #or not Gmanager.is_owner(params["id"],session["user_id"]) and not Gmanager.may_user_do(@project,session["user_id"],:change_other_groups) 
 	respond_to do |format|
-	    format.html {render :action => "edit", :error => "У вас нет прав для редактирвоания этой группы"}
+	    format.html {redirect_to gmanagers_path(:project_id=>@project, :error => "У вас нет прав для редактирвоания этой группы") and return}
+	    
 	end
+
     end
 
     case temp
@@ -68,7 +68,8 @@ class GmanagersController < ApplicationController
 		end
 	    else
 		respond_to do |format|
-		    format.html {render :action => "edit", :error=>"Группа с таким именем уже существует"}
+		    #format.html {render :action => "edit", :error=>"Группа с таким именем уже существут"}
+		    format.html {redirect_to gmanagers_path(:project_id=>@project, :error => "Группа с таким именем уже существует")}
 		end
 	    end
 	when "add_user"
