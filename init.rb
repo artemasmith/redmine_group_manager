@@ -16,6 +16,7 @@ Redmine::Plugin.register :groupmanager do
     permission :change_admin_groups, :gmanagers => [:update_admin]
     permission :delete_admin_groups, :gmanagers => [:delete_admin]
     permission :change_other_groups, :gmanagers => [:update_admin]
+    permission :delete_other_groups, :gmanagers => [:delete_admin]
 
   end
   menu :project_menu, :groups, {:controller => 'gmanagers', :action => 'index'}, :caption=> "Группы",:last=>true, :param => :project_id

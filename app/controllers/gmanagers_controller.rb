@@ -51,7 +51,7 @@ class GmanagersController < ApplicationController
     temp=params["edit"]
     
     #check if user try to change admin created group
-    if Gmanager.is_admin_group(params["id"]) and not Gmanager.may_user_do(@project,session["user_id"],:change_admin_groups) #or not Gmanager.is_owner(params["id"],session["user_id"]) and not Gmanager.may_user_do(@project,session["user_id"],:change_other_groups) 
+    if Gmanager.is_admin_group(params["id"]) and not Gmanager.may_user_do(@project,session["user_id"],:change_admin_groups) or not Gmanager.is_owner(params["id"],session["user_id"]) and not Gmanager.may_user_do(@project,session["user_id"],:change_other_groups) 
 	respond_to do |format|
 	    format.html {redirect_to gmanagers_path(:project_id=>@project, :error => "У вас нет прав для редактирвоания этой группы") and return}
 	    
@@ -107,6 +107,15 @@ class GmanagersController < ApplicationController
 
   def destroy
     @project = Project.find(params[:project_id])
+    
+    #check if user try to change admin created group
+    if Gmanager.is_admin_group(params["id"]) and not Gmanager.may_user_do(@project,session["user_id"],:delete_admin_groups) or not Gmanager.is_owner(params["id"],session["user_id"]) and not Gmanager.may_user_do(@project,session["user_id"],:delete_other_groups) 
+	respond_to do |format|
+	    format.html {redirect_to gmanagers_path(:project_id=>@project, :error => "У вас нет прав для удаления этой группы") and return}
+	end
+
+    end
+    
     Gmanager.delete_group(params["project_id"],params["id"])
     respond_to do |format|
 	format.html {redirect_to gmanagers_path(:project_id=>@project)}

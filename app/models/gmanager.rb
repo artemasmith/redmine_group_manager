@@ -138,7 +138,7 @@ def self.delete_group(idpr,idgr)
     Member.delete(idm)
     Group.delete(idgr)
     
-    if pgm.blank?
+    if not pgm.blank?
 	Gmanager.delete(pgm)
     end
 end
