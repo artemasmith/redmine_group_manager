@@ -13,4 +13,8 @@ def render_user_depart(id)
     return Gmanager.get_user_depart(id)
 end
 
+def render_custom_fields()
+    return Gmanager.get_user_custom_fields()
+end
+
 end

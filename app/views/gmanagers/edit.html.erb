@@ -1,4 +1,4 @@
-<h2><%= link_to "Группы",gmanagers_path(:project_id=>params["project_id"]) %> >> <%= link_to render_group_by_id(params["id"].to_i),gmanager_path(params[:id],:project_id=>params["project_id"]) %> </h2>
+<h2><%= link_to "Groups",gmanagers_path(:project_id=>params["project_id"]) %> >> <%= link_to render_group_by_id(params["id"].to_i),gmanager_path(params[:id],:project_id=>params["project_id"]) %> </h2>
 
 
 <div class="splitcontentleft">
@@ -6,7 +6,7 @@
 <%= form_tag gmanager_path(params["id"],:edit=>"group_name",:project_id=>params["project_id"]), :method=>"put", :class=>"edit_group" do %>
 <fieldset>
 <p>
-<label> Название группы <%= text_field_tag "groupname",render_group_by_id(params["id"].to_i) %></label>  <%= submit_tag l(:button_save)%>
+<label> Group name <%= text_field_tag "groupname",render_group_by_id(params["id"].to_i) %></label>  <%= submit_tag l(:button_save)%>
 </p>
 <%= params["error"] %>
 </fieldset>
@@ -16,7 +16,7 @@
 <div class="tab-content" >
 <table class="list users">
 <thead><tr>
-      <th>Пользователь</th>
+      <th>User</th>
       <th style="width:15%"></th>
     </tr></thead>
 <tbody>

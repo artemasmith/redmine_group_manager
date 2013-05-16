@@ -1,6 +1,9 @@
 = groupmanager
 
 
-This plugin makes project tab of group management. Redmine adminisrator allow project admin users, not 
-redmine admin users to change group's membership. Adding or deleteing users are allowed in scope of project. 
-You can't add user, wich is not project member.
+This plugin provide a project's tab of group management. Redmine adminisrator allow project roles of  users (not 
+redmine admins) to change group's membership, view,  create or delete admin created groups or other user's groups. Permissions of operations on groups are managed from role's permissions tab in Administration.
+Adding or deleteing users are allowed in scope of project. 
+Works with redmine 2.2.3
+In my installation users have custom fields Department and Position.
+Note: You can't add user, wich is not project member. (It's an administator privelege..)

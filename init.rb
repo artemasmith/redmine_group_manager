@@ -3,8 +3,8 @@
 Redmine::Plugin.register :groupmanager do
   name 'Groupmanager plugin'
   author 'Artem Kuznetsov'
-  description 'This plugin used for project tabs group management by project-admins. Non redmine admins'
-  version '0.1.5'
+  description 'This plugin provide groups management tab for project allowing non redmine-admins users to manage groups'
+  version '0.1.8'
   url 'https://github.com/artemasmith/redmine-groups-manager.git'
   author_url 'https://github.com/artemasmith'
 
@@ -17,6 +17,8 @@ Redmine::Plugin.register :groupmanager do
     permission :delete_admin_groups, :gmanagers => [:delete_admin]
     permission :change_other_groups, :gmanagers => [:update_admin]
     permission :delete_other_groups, :gmanagers => [:delete_admin]
+    
+
 
   end
   menu :project_menu, :groups, {:controller => 'gmanagers', :action => 'index'}, :caption=> "Группы",:last=>true, :param => :project_id

@@ -25,6 +25,22 @@ def self.all(pr_id)
     return res
 end
   
+#return User's custom fields names or false if there is no custom fields  
+def self.get_user_custom_fields()
+    custom=CustomField.find_all_by_type('UserCustomField')
+    if custom.blank?
+	return false
+    else
+	res=[]
+	i=0
+	for c in custom
+	    res[i]=c['name']
+	    i+=1
+	end	
+	return res
+    end
+
+end
   
 def self.get_group_name_by_id(id)
     return Group.find(id).lastname

@@ -22,26 +22,41 @@ ru:
   label_reports: Отчеты
   label_Groups: группы
   label_group: группы
-  label_gmanagers: гра
-
-  
   groups_header: Группы
   groups_link: Группы-линк
-
-
-  
   label_groups: Группы
-  
-  
-  project_module_group: Управление группами
-  
+  header_groups: Групппы-хед
+  text_gmanagers_groups: Группы-текст1
+  text-groups: Группы-просто текст
+  project_module_groups: Управление группами
+#button  
   button_create: Создать
-  
-  
+  button_change: Изменить
+  label_change: Изменить_лэйбл
+#user
+  user: Пользователь
+  row_user: Поль
+  table_user: Пользак
+  label_user: Пользователь
+  text_user: ПользовательТекст
+  field_user: Пользовательполе
+  notice_user: Пользовательнотис
+  description_user: Пользовательдескр
+#pos  
+  label_position: Должность
+#department  
+  label_department: Отдел
+#link  
+  label_change: Изменить
+  project_module_group: Управление группами
+  button_create: Создать
   label_groups: Группы
+#permissions (working)  
   permission_view_groups: Просматривать группы
   permission_create_groups: Создавать группы
   permission_change_groups: Изменять группы
+  permission_change_admin_groups: Изменять группы созданные администратором
+  permission_delete_admin_groups: Удалять группы созданные администратором
   permission_delete_groups: Удалять группы
   permission_delete_other_groups: Удалять группы других пользователей
   permission_change_other_groups: Изменять группы других пользователей
