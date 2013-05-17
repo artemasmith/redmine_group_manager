@@ -21,5 +21,5 @@ Redmine::Plugin.register :groupmanager do
 
 
   end
-  menu :project_menu, :groups, {:controller => 'gmanagers', :action => 'index'}, :caption=> "Группы",:last=>true, :param => :project_id
+  menu :project_menu, :groups, {:controller => 'gmanagers', :action => 'index'}, :caption=> "Groups",:last=>true, :param => :project_id
 end
