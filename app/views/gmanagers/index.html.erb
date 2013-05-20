@@ -7,6 +7,7 @@
 <thead>
 <th> Groups </th>
 <th> Users </th>
+<th> Owner </th>
 <th> </th>
 </thead>
 
@@ -16,6 +17,7 @@
 
 <td><%= link_to_group(k) %></td>
 <td> <%= v.count %> </td>
+<td> <%= render_group_owner(k) %>  </td>
 <td class="button"> <%= link_to "Delete",{:controller=>"gmanagers", :action=>"destroy",:id=>k,:project_id=>params["project_id"]}, :method=>"delete", :confirm=>"Are you sure?",:class=>"icon icon-del"%></td>
 
 </tr>

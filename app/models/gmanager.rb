@@ -3,6 +3,7 @@ class Gmanager < ActiveRecord::Base
   
   
 #show all project groups
+#returns hash {id_group => [array of users in group]}
 def self.all(pr_id)
 
     pr_id=pr_id.to_s
@@ -23,6 +24,18 @@ def self.all(pr_id)
 	
     end
     return res
+end
+
+#return group owner's id (user id) if exists
+#idgr - ID of searchable group
+def self.get_group_owner(idgr)
+    res = Gmanager.find_by_id_group(idgr)
+    if res.blank?
+	return false
+    else
+	res=res['id_owner']
+	return res
+    end
 end
   
 #return User's custom fields names or false if there is no custom fields  
@@ -194,6 +207,16 @@ def self.is_admin_group(idgr)
 	return false
     end
     
+end
+
+def self.get_user_name(iduser)
+    if iduser
+	res=User.find(iduser)
+	ret=res['lastname'].to_s + " " + res['firstname'].to_s
+	return ret
+    else
+	return false
+    end
 end
 
 end

@@ -17,4 +17,10 @@ def render_custom_fields()
     return Gmanager.get_user_custom_fields()
 end
 
+def render_group_owner(idgr)
+    id=Gmanager.get_group_owner(idgr)
+    return Gmanager.get_user_name(id)
+    #return id.to_s
+end
+
 end
