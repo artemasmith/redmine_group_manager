@@ -150,7 +150,7 @@ def self.create_group(idpr,name,owner)
     
 	return true
     else
-	return true
+	return false
     end
 end
 
@@ -182,7 +182,7 @@ def self.may_user_do(id_project,id_user,action)
     user=User.find(id_user)
     roles=user.roles_for_project(project)
     for r in roles
-	if r[:permissons].include?(action)
+	if r[:permissions].include?(action)
 	    return true
 	end
     end
@@ -217,6 +217,18 @@ def self.get_user_name(iduser)
     else
 	return false
     end
+end
+
+
+#insert into Gmanager table new entry or change existing
+def self.change_owner(id_group,id_owner)
+    gm=Gmanager.find_by_id_group(id_group)
+    if gm.blank?
+	gm=Gmanager.create(:id_group => id_group, :id_owner => id_owner)
+    else
+	gm.update_attribute(:id_owner, id_owner)
+    end
+    gm.save
 end
 
 end

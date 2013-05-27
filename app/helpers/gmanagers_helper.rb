@@ -19,8 +19,26 @@ end
 
 def render_group_owner(idgr)
     id=Gmanager.get_group_owner(idgr)
-    return Gmanager.get_user_name(id)
-    #return id.to_s
+    #return Gmanager.get_user_name(id)    
+    return id
+end
+
+def render_user_name(id)
+    ret=Gmanager.get_user_name(id)    
+    if not ret
+	return Gmanager.get_user_name('1')
+    else
+	return ret
+    end
+end
+
+def render_possible_owners()
+    users=User.all
+    ret=[]
+    for u in users
+	ret.append([u['firstname'].to_s + " " + u['lastname'].to_s,u['id']])
+    end
+    return ret
 end
 
 end

@@ -12,11 +12,27 @@
 </fieldset>
 <% end %>
 
-<p> </p>
+<% if  Gmanager.may_user_do(params['project_id'],session['user_id'],:change_owner)  %>
+<fieldset>
+<%= form_tag gmanager_path(:edit=>"change_owner",:project_id=>params["project_id"]),:id=>params["id"], :method=>"put", :class=>"edit_groups" do %>
+
+<p>
+
+<label> Owner</label> <%=  select_tag(:owner, options_for_select(render_possible_owners(),render_group_owner(params["id"]) ))%>
+ <%= submit_tag l(:button_save) %>
+</p>
+
+
+<% end %>
+</fieldset>
+
+<%  end   %>
+
+
 <div class="tab-content" >
 <table class="list users">
 <thead><tr>
-      <th>User</th>
+      <th>Users</th>
       <th style="width:15%"></th>
     </tr></thead>
 <tbody>
@@ -34,10 +50,15 @@
 
 </div>
 
+
+
 <div class="splitcontentright">
-<%= form_tag gmanager_path(params["id"],:edit=>"add_user",:project_id=>params["project_id"]), :method=>"put", :class=>"edit_group" do%>
+
 <div id="users">
-<fieldset>
+<%= form_tag gmanager_path(params["id"],:edit=>"add_user",:project_id=>params["project_id"]), :method=>"put", :class=>"edit_group" do%>
+
+<fieldset style="width: 40%">
+<div id="users">
 <% for k,v in @all_users %>
 <p><label> <%= check_box_tag 'user_select[]',k %> <%= v %> </label></p>
 <% end %>
@@ -47,4 +68,7 @@
 <%= submit_tag l(:button_add)%>
 </p>
 <% end %>
+
+</div>
+
 </div>
