@@ -17,7 +17,7 @@ class GmanagersController < ApplicationController
   def create
     error=''
     if Gmanager.create_group(params["project_id"],params["groupname"],session['user_id'])
-	error="группа с таким именем уже существует"
+	error="Group with the same name already exists"
     end
     respond_to do |format|
 	format.html {redirect_to gmanagers_path(:project_id=>@project,:error=>error)}
@@ -53,7 +53,7 @@ class GmanagersController < ApplicationController
     #render error if user try to change something without permissions
     if (Gmanager.is_admin_group(params["id"]) and not Gmanager.may_user_do(params['project_id'],session["user_id"],:change_admin_groups)) or (not Gmanager.is_owner(params["id"],session["user_id"]) and not Gmanager.may_user_do(params["project_id"],session["user_id"],:change_other_groups)) 
 	respond_to do |format|
-	    format.html {redirect_to gmanagers_path(:project_id=>@project, :error => "У вас нет прав для редактирвоания этой группы") and return}
+	    format.html {redirect_to gmanagers_path(:project_id=>@project, :error => "You've got no rights for managing this group") and return}
 	end
     end
 
@@ -67,7 +67,7 @@ class GmanagersController < ApplicationController
 	    else
 		respond_to do |format|
 		    #format.html {render :action => "edit", :error=>"Группа с таким именем уже существут"}
-		    format.html {redirect_to gmanagers_path(:project_id=>@project, :error => "Группа с таким именем уже существует")}
+		    format.html {redirect_to gmanagers_path(:project_id=>@project, :error => "Group with the same name already exists")}
 		end
 	    end
 	when "add_user"
@@ -80,7 +80,7 @@ class GmanagersController < ApplicationController
 		end
 	    else
 		respond_to do |format|
-		    format.html {redirect_to edit_gmanager_path(:project_id=>@project,:id=>params["id"],:error=>"Группа с таким именем уже существует")}
+		    format.html {redirect_to edit_gmanager_path(:project_id=>@project,:id=>params["id"],:error=>"You must choose users to add")}
 		end
 
 	    end
@@ -117,7 +117,7 @@ class GmanagersController < ApplicationController
     #check if user try to change admin created group
     if Gmanager.is_admin_group(params["id"]) and not Gmanager.may_user_do(@project,session["user_id"],:delete_admin_groups) or not Gmanager.is_owner(params["id"],session["user_id"]) and not Gmanager.may_user_do(@project,session["user_id"],:delete_other_groups) 
 	respond_to do |format|
-	    format.html {redirect_to gmanagers_path(:project_id=>@project, :error => "У вас нет прав для удаления этой группы") and return}
+	    format.html {redirect_to gmanagers_path(:project_id=>@project, :error => "You have not enough rights to delete this group") and return}
 	end
 
     end

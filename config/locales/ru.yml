@@ -60,7 +60,7 @@ ru:
   permission_delete_groups: Удалять группы
   permission_delete_other_groups: Удалять группы других пользователей
   permission_change_other_groups: Изменять группы других пользователей
-  
+  permission_change_owner: Изменять валдельца группы
   label_groups_plural: Группы
   
 
