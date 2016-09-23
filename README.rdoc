@@ -1,9 +1,17 @@
-= groupmanager
+= Group Manager Plugin
 
+This plugin provides a project tab for group management. A Redmine administrator can allow project roles of non-admin users to change group membership, view, create or delete admin created groups or other users' groups. Permissions of operations on groups are managed from the roles permissions tab in the Administration menu.
+Adding or deleting users is allowed in scope of the project. 
 
-This plugin provide a project's tab of group management. Redmine administrator allow project roles of  users (not 
-redmine admins) to change group's membership, view,  create or delete admin created groups or other user's groups. Permissions of operations on groups are managed from role's permissions tab in Administration menu.
-Adding or deleteing users are allowed in scope of project. 
-Works with redmine 2.2.3
-In my installation users have custom fields Department and Position. If you've got user custom fields, they will be displayed in group view.
-Note: You can't add user, wich is not project member. (It's an administrator privelege..)
+If you have got user custom fields, they will be displayed in the group view.
+Note: You cannot add users which is not a project member. This is an administrator privilege.
+
+== Installation
+
+For installation, clone the Git repository to your plugins folder, restart the Redmine application and perform the migration.
+
+  cd redmine/plugins
+  git clone https://github.com/artemasmith/groupmanager.git
+  cd ..
+  rake redmine:plugins:migrate NAME=groupmanager RAILS_ENV=production
+  touch tmp/restart.txt
