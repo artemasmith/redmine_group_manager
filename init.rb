@@ -1,10 +1,10 @@
 #!/bin/env ruby
 # encoding: utf-8
 Redmine::Plugin.register :groupmanager do
-  name 'Groupmanager plugin'
+  name 'Redmine Group manager plugin'
   author 'Artem Kuznetsov'
   description 'This plugin provide groups management tab for project allowing non redmine-admins users to manage groups'
-  version '0.1.8'
+  version '0.2.0'
   url 'https://github.com/artemasmith/redmine-groups-manager.git'
   author_url 'https://github.com/artemasmith'
 

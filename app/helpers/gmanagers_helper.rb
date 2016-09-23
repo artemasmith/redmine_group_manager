@@ -19,7 +19,6 @@ module GmanagersHelper
 
   def render_group_owner(idgr)
     id = Gmanager.get_group_owner(idgr)
-    #return Gmanager.get_user_name(id)    
     return id
   end
 

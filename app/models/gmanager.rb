@@ -1,13 +1,12 @@
 class Gmanager < ActiveRecord::Base
   unloadable
   
-  
   #show all project groups
   #returns hash {id_group => [array of users in group]}
-  def self.all(pr_id)
+  def self.getAll(pr_id)
     pr_id = pr_id.to_s
     pid = Project.find_by_identifier(pr_id).id
-    mem = Member.find_all_by_project_id(pid)
+    mem = Member.where(:project_id => pid).order(user_id: :asc)
     res = { }
     for m in mem
       begin
@@ -32,10 +31,9 @@ class Gmanager < ActiveRecord::Base
   
   #return User's custom fields names or false if there is no custom fields  
   def self.get_user_custom_fields()
-    custom = CustomField.find_all_by_type('UserCustomField')
-    res = false
+    custom = CustomField.where(:type => 'UserCustomField')
+    res = []
     if !custom.blank?
-      res = []
       i = 0
       custom.each do |c|
         res[i] = c['name']
@@ -53,8 +51,8 @@ class Gmanager < ActiveRecord::Base
   def self.get_user_depart(id)
     val = User.find(id).custom_values
     res = { }
-    res[:pos] = val[0][:value].to_s 
-    res[:dep] = val[1][:value].to_s
+    res[:pos] = val[0] ? val[0][:value].to_s : "-"
+    res[:dep] = val[1] ? val[1][:value].to_s : "-"
     res
   end
 
@@ -68,7 +66,7 @@ class Gmanager < ActiveRecord::Base
     id = id.to_s
     pid = Project.find_by_identifier(id).id
     tres = []
-    mem = Member.find_all_by_project_id(pid)
+    mem = Member.where(:project_id => pid).to_a
     mem.delete_if{|x| x.user_id==grid}
     mcount = mem.count
     for i in 0..mcount-1
