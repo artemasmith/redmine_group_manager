@@ -9,17 +9,16 @@ module GmanagersHelper
     return Gmanager.get_group_name_by_id(id)
   end
 
-  def render_user_depart(id)
-    return Gmanager.get_user_depart(id)
+  def render_cf_keys()
+    return Gmanager.get_user_cf_keys()
   end
 
-  def render_custom_fields()
-    return Gmanager.get_user_custom_fields()
+  def render_cf_values(id)
+    return Gmanager.get_user_cf_values(id)
   end
 
   def render_group_owner(idgr)
     id = Gmanager.get_group_owner(idgr)
-    #return Gmanager.get_user_name(id)    
     return id
   end
 

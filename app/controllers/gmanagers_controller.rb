@@ -11,7 +11,7 @@ class GmanagersController < ApplicationController
     
   def index
     @project = Project.find(params[:project_id])
-    @groups = Gmanager.all(params[:project_id])
+    @groups = Gmanager.getAll(params[:project_id])
   end
   
   def create
@@ -68,7 +68,7 @@ class GmanagersController < ApplicationController
     end
     when "add_user"
       if params["user_select"]
-	users = User.find_all_by_id(params["user_select"])
+	users = User.where(:id => params["user_select"])
 	@group.users << users
 	respond_to do |format|
           format.html { redirect_to edit_gmanager_path(:project_id => @project, :id => params["id"]) }
