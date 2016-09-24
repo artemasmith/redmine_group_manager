@@ -1,4 +1,4 @@
-= Group Manager Plugin
+= Redmine Group Manager Plugin
 
 This plugin provides a project tab for group management. A Redmine administrator can allow project roles of non-admin users to change group membership, view, create or delete admin created groups or other users' groups. Permissions of operations on groups are managed from the roles permissions tab in the Administration menu.
 Adding or deleting users is allowed in scope of the project. 
