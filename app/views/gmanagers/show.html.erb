@@ -1,30 +1,28 @@
-<h2><%= link_to "Groups",gmanagers_path(:project_id=>params["project_id"])%>>><%= render_group_by_id(params["id"].to_i) %></h2>
+<h2><%= link_to "Groups",gmanagers_path(:project_id=>params["project_id"])%> &gt;&gt; <%= render_group_by_id(params["id"].to_i) %></h2>
 <div class="tab-content" id="tab-content-general">
-<div class="splitcontentleft">
-<table class="group list">
-<thead>
-<tr>
-<th class="label"><label class="user" value="user">user</label></th> 
+  <div class="splitcontentleft">
+    <table class="group list">
+      <thead>
+        <tr>
+          <th class="label"><label class="user" value="user">User</label></th> 
+          <% for cf_key in render_cf_keys() %>
+            <th><%= cf_key %></th> 
+          <% end %>
+        </tr>
+      </thead>
 
-<% for custom in render_custom_fields() %>
-<th> <%= custom %> </th> 
+      <tbody>
+        <% for u in @group %>
+          <tr>
+            <td class="user"><%= u["lastname"].to_s + " " + u["firstname"].to_s %></td>
+            <% for cf_value in render_cf_values(u["id"].to_i) %>
+              <td><%= cf_value %></td> 
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<% end %>
-
-</tr>
-</thead>
-<tbody>
-<% for u in @group%>
-
-    <tr>
-        <td class="user"> <%= u["lastname"].to_s + " " + u["firstname"].to_s %> </td>
-        <% dep=render_user_depart(u["id"].to_i)%>
-        <td> <%= dep[:pos] %> </td>
-        <td> <%= dep[:dep]  %></td>
-    </tr>
-<% end %>
-</tbody>
-</table>
-<%= link_to "Change", edit_gmanager_path(params["id"], :project_id=>params["project_id"]) %>
-</div>
+    <%= link_to "Change", edit_gmanager_path(params["id"], :project_id=>params["project_id"]) %>
+  </div>
 </div>

@@ -29,13 +29,13 @@ class Gmanager < ActiveRecord::Base
     res  
   end
   
-  #return User's custom fields names or false if there is no custom fields  
-  def self.get_user_custom_fields()
-    custom = CustomField.where(:type => 'UserCustomField')
+  #return user custom field names or an empty array if none are available
+  def self.get_user_cf_keys()
+    keys = CustomField.where(:type => 'UserCustomField')
     res = []
-    if !custom.blank?
+    if !keys.blank?
       i = 0
-      custom.each do |c|
+      keys.each do |c|
         res[i] = c['name']
         i += 1
       end	
@@ -43,17 +43,28 @@ class Gmanager < ActiveRecord::Base
     res
   end
   
-  def self.get_group_name_by_id(id)
-    Group.find(id).lastname
+  #return user custom field values or an empty array if none are available
+  def self.get_user_cf_values(id)
+    keys = CustomField.where(:type => 'UserCustomField')
+    values = User.find(id).custom_values
+
+    res = []
+    if !keys.blank?
+      i = 0
+      keys.each do |c|
+        res[i] = values[i] ? values[i][:value].to_s : "-"
+        i += 1
+      end	
+    end
+    res
+    #res = { }
+    #res[:pos] = val[0] ? val[0][:value].to_s : "-"
+    #res[:dep] = val[1] ? val[1][:value].to_s : "-"
+    #res
   end
 
-  #return users's department from custom values
-  def self.get_user_depart(id)
-    val = User.find(id).custom_values
-    res = { }
-    res[:pos] = val[0] ? val[0][:value].to_s : "-"
-    res[:dep] = val[1] ? val[1][:value].to_s : "-"
-    res
+  def self.get_group_name_by_id(id)
+    Group.find(id).lastname
   end
 
   def self.get_group_users(id)
