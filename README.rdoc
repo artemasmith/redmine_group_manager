@@ -16,3 +16,25 @@ For installation, clone the Git repository to your plugins folder, restart the R
   cd ..
   rake redmine:plugins:migrate NAME=redmine_group_manager RAILS_ENV=production
   touch tmp/restart.txt
+
+== Settings
+
+The following permissions can be set in the Roles and permissions section of administration menu
+* View groups. Allows a user to see and access the Groups tab of the project. This option must be checked if any other function is going to be used.
+* Create groups. Allows to open "Create group" page. The user input the name ot the group and automatically gains the ownership of the group.
+* Change groups. Allows to change name and userlist of a group. Groups owned by other users require additional permissions.
+* Delete groups. Allow to delete a group. Groups owned by other users require additional permissions. No further confirmation is asked. Use with care.
+* Change admin's groups. Expands permissions of "Change groups" option for groups owned by admin user. Only make sense when "Change groups" is allowed.
+* Delete admin's groups. Expands permissions of "Delete groups" option for groups owned by admin user. Only make sense when "Delete groups" is allowed.
+* Change other user's groups. Expands permissions of "Change groups" option for groups owned not by admin user. Only make sense when "Change groups" is allowed.
+* Delete other user's groups. Expands permissions of "Delete groups" option for groups owned not by admin user. Only make sense when "Delete groups" is allowed.
+* Change owner. Display additional field when changing a group. The field allows to change owner to any other Redmine user. Note that it reveals all Redmine users.
+
+== Plugin concept and usage recommendations
+
+Plugin manages the permissions through group ownership. Every new group is owned by the creating user. Every previously existing group is owned by the admin user. There are 3 ownership relations: my groups, other user groups, admin groups.
+
+== Remarks
+
+Plugin mostly checks permissions in response to the user action. Therefore delete link is displayed even if a user is not allowed to delete a group or a user. Usage of this link will result in an error message.
+An erroneous message is displayed sometimes, when creating groups, telling that this group already exists. Ignore that message.
