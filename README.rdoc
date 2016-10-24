@@ -20,19 +20,25 @@ For installation, clone the Git repository to your plugins folder, restart the R
 == Settings
 
 The following permissions can be set in the Roles and permissions section of administration menu
-* View groups. Allows a user to see and access the Groups tab of the project. This option must be checked if any other function is going to be used.
-* Create groups. Allows to open "Create group" page. The user input the name ot the group and automatically gains the ownership of the group.
-* Change groups. Allows to change name and userlist of a group. Groups owned by other users require additional permissions.
-* Delete groups. Allow to delete a group. Groups owned by other users require additional permissions. No further confirmation is asked. Use with care.
-* Change admin's groups. Expands permissions of "Change groups" option for groups owned by admin user. Only make sense when "Change groups" is allowed.
-* Delete admin's groups. Expands permissions of "Delete groups" option for groups owned by admin user. Only make sense when "Delete groups" is allowed.
-* Change other user's groups. Expands permissions of "Change groups" option for groups owned not by admin user. Only make sense when "Change groups" is allowed.
-* Delete other user's groups. Expands permissions of "Delete groups" option for groups owned not by admin user. Only make sense when "Delete groups" is allowed.
-* Change owner. Display additional field when changing a group. The field allows to change owner to any other Redmine user. Note that it reveals all Redmine users.
+* <i>View groups</i>. Allows a user to see and access the Groups tab of the project. This option must be checked if any other function is going to be used.
+* <i>Create groups</i>. Allows to open "Create group" page. The user input the name ot the group and automatically gains the ownership of the group. The new group will not be visible in the group tab, until the group is added as a member of the project. So the user must be permitted to manage project members.
+* <i>Change groups</i>. Allows to change name and userlist of a group. Groups owned by other users require additional permissions.
+* <i>Delete groups</i>. Allow to delete a group. Groups owned by other users require additional permissions. No further confirmation is asked on deletion. Use with care.
+* <i>Change other user's groups</i>. Expands permissions of <i>Change groups</i> option for all groups, except the ones owned by admin user. It only makes sense when <i>Change groups</i> is allowed.
+* <i>Delete other user's groups</i>. Expands permissions of <i>Delete groups</i> option for all groups, except the ones owned by admin user. It only makes sense when <i>Delete groups</i> is allowed.
+* <i>Change admin's groups</i>. Allows to change groups owned by admin user if both <i>Change groups</i> and <i>Change other user's groups</i> are allowed.
+* <i>Delete admin's groups</i>. Allows to delete groups owned by admin user if both <i>Delete groups</i> and <i>Delete other user's groups</i> are allowed.
+* <i>Change owner</i>. Display additional field when changing a group. It allows to change owner to any other Redmine user if a group can be changed according to three "Change groups" settings combination. Note that it reveals all Redmine users to any user.
 
 == Plugin concept and usage recommendations
 
-Plugin manages the permissions through group ownership. Every new group is owned by the creating user. Every previously existing group is owned by the admin user. There are 3 ownership relations: my groups, other user groups, admin groups.
+Plugin manages the permissions through group ownership. Every new group is owned by the creating user. Every previously existing group is owned by the admin user. There are 3 ownership relations: my groups, other user groups, admin groups. You can only extend permissions in that order when you set change or delete group permissions.
+The escalation of permissions should be done in the following way:
+* Add <i>View groups</i> as a first step.
+* Add <i>Create groups</i> if user already have permissions to manage project members. Otherwise this is useless.
+* Managing and deletion of owned groups goes well with <i>Create groups</i> permission. It can keep the user in his own realm.
+* <i>Change other user's groups</i> requires <i>Change groups</i> and goes well without <i>Create groups</i>, since all previously created groups can be changed, but project membership is limited to group policy. Admin groups can be kept read-only.
+* <i>Change owner</i> is useful to prepare groups for users with lower permission level.
 
 == Remarks
 
