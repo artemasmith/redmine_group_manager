@@ -25,7 +25,7 @@ module GmanagersHelper
   def render_user_name(id)
     ret =  Gmanager.get_user_name(id)    
     if not ret
-      return Gmanager.get_user_name('1')
+      return Gmanager.get_user_name(User.current.id)
     else
       return ret
     end
